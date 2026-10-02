@@ -1,155 +1,183 @@
-# INFLUBUILDER
-### AI-Powered Content Improvement & Creator–Editor Platform
-**Built for the Google Gemini API Hackathon (Best Use of Google Gemini API)**
+# INFLUBUILDER — AI-Powered Content Improvement & Creator–Editor Platform
 
-> *"Don't just create content. Understand what makes it better."*
+> **Built for the Google Gemini API Hackathon**
+> **Core AI: GENA (General ENgagement Analyst) — powered by Google Gemini**
 
-InfluBuilder is an intelligent content diagnosis ecosystem for video creators. Powered by **Google Gemini API**, it evaluates uploaded draft videos across visual quality, spoken audio, pacing, structure, and opening retention. Instead of claiming fake virality or views, InfluBuilder converts Gemini's multimodal perception into structured scores, timestamped feedback, priority improvement plans, a video editor marketplace, and a **Before vs. After Comparison Loop**.
-
----
-
-## 🌟 Key Features
-
-1. **Google Gemini Multimodal Video Audit**:
-   - Analyzes video frames, audio speech clarity, pacing rhythm, and hook strength simultaneously.
-   - Outputs strict, schema-validated JSON with overall scores, category breakdowns, strengths, and issues.
-
-2. **Cinematic Analysis Experience**:
-   - Progressive step-by-step audit visualization showing Gemini extracting content, inspecting hooks, checking audio acoustics, and generating recommendations.
-
-3. **Priority Fixes & Actionable Workflows**:
-   - "Fix These First" prioritized action cards with single-click options for **Do It Yourself (DIY)** or **Hire an Editor**.
-
-4. **Editor Marketplace**:
-   - Dedicated marketplace matching creators with specialist editors skilled in short-form reels, educational explainers, motion graphics, and commercial ads.
-
-5. **Signature BEFORE vs AFTER Comparison**:
-   - Dual-player visual verification displaying score gains (e.g., 68 → 84) across hook strength, pacing, clarity, and audio.
-
-6. **Full SaaS Dashboard & Project Directory**:
-   - Track videos analyzed, average content score, improvements made, and latest AI insights.
-
-7. **Hackathon Zero-Downtime Demo Mode**:
-   - Works seamlessly with real `GEMINI_API_KEY` calls or in Demo Mode with rich sample audits.
+[![Demo](https://img.shields.io/badge/Demo-Live-green)](#) [![Gemini](https://img.shields.io/badge/AI-GENA%20%28Gemini%20Backend%29-blue)](#) [![License](https://img.shields.io/badge/License-MIT-yellow)](#)
 
 ---
 
-## 🏗️ Architecture & Technology Stack
+## What is GENA?
+
+**GENA (General ENgagement Analyst)** is InfluBuilder's core AI brain — an intelligent content audit system built on top of Google Gemini's multimodal API. GENA watches your video (frames + audio), reads structure, and delivers a structured content quality report.
+
+> "Don't just create content. Understand what makes it better — before you publish."
+
+---
+
+## Overview
+
+InfluBuilder is a **complete production-quality MVP** that demonstrates the **BEST USE OF THE GOOGLE GEMINI API** hackathon theme. GENA sits at the core of every feature:
+
+| Feature | GENA's Role |
+|---|---|
+| Video Content Audit | Multimodal analysis of video + audio via Gemini File API |
+| Structured AI Report | JSON schema-validated scores + timestamp-specific issues |
+| Before vs After Comparison | GENA re-analyzes revised video to measure editor's improvement |
+| Editor Marketplace | Editors receive GENA audit pre-attached to every project |
+| Creator Dashboard | Visualizes GENA content scores over time |
+
+---
+
+## Key Features
+
+### 👨‍🎨 For Creators
+- **Upload any MP4/MOV/WEBM video draft** — drag & drop or file picker
+- **GENA Content Audit** — instant AI analysis of hook, pacing, audio, CTA, clarity, visual quality
+- **Timestamp-Specific Feedback** — GENA pinpoints exact seconds where issues occur
+- **Priority Fix Workflow** — top 3 ranked improvements with severity levels
+- **Editor Marketplace** — hire verified video editors, sharing the GENA audit directly
+
+### 🎬 For Video Editors
+- **Editor Portal** — dedicated workspace with incoming project requests
+- **Pre-Attached GENA Reports** — see the full audit before opening the timeline
+- **Submit Revised Videos** — GENA automatically re-audits and generates Before/After reports
+- **GENA Score Tracking** — see average score improvement across completed projects
+
+### 🧠 AI / GENA Capabilities
+- Google Gemini **multimodal** video + audio understanding
+- Structured **JSON diagnostics** with schema validation
+- **6-dimension scoring**: Hook · Pacing · Clarity · Visual · Audio · CTA
+- Demo fallback mode when API key is not configured (perfect for hackathon demos)
+- Before vs After score comparison with percentage gain
+
+---
+
+## Dual-Role Architecture
+
+InfluBuilder supports two user types with a unified login experience:
+
+| Role | Entry Point | GENA Features |
+|---|---|---|
+| **Creator** | `/dashboard` + `/analyze` | Upload, audit, hire editor, view Before/After |
+| **Video Editor** | `/editor-portal` | Accept jobs, view GENA pre-audit, upload revised edits |
+
+Both roles share the same login page at `/login` with a one-click demo for each role.
+
+---
+
+## Tech Stack
+
+### Frontend
+- **React + TypeScript** (Vite)
+- **Tailwind CSS** — custom design system (navy + blue + orange)
+- **Framer Motion** — micro-animations and transitions
+- **Recharts** — AI score visualization charts
+- **React Router DOM v6** — client-side routing
+
+### Backend
+- **Express.js + TypeScript**
+- **@google/generative-ai** — GENA (Gemini API)
+- **Multer** — video file upload handling
+- **In-memory project store** (demo-ready, production-ready to swap for MongoDB)
+
+---
+
+## Project Structure
 
 ```
-                                  INFLUBUILDER ARCHITECTURE
-                                  
-+-----------------------------------------------------------------------------------------+
-|                                    FRONTEND (CLIENT)                                    |
-|   React 18 • TypeScript • Vite • Tailwind CSS • Lucide Icons • Recharts • Framer Motion   |
-+-----------------------------------------------------------------------------------------+
-                                              |
-                                      HTTP / REST API
-                                              v
-+-----------------------------------------------------------------------------------------+
-|                                    BACKEND (SERVER)                                     |
-|                      Node.js • Express.js • TypeScript • Multer Uploads                 |
-+-----------------------------------------------------------------------------------------+
-                                      /               \
-                  (GEMINI_API_KEY set)                 (Fallback / Demo Mode)
-                           v                                   v
-             +--------------------------+             +------------------+
-             |   GOOGLE GEMINI 2.5 API  |             | DEMO MOCK ENGINE |
-             |   Multimodal Video Audit |             | High Fidelity    |
-             |   Structured JSON Output |             | Pre-loaded Audits|
-             +--------------------------+             +------------------+
+influbuilder/
+├── client/                  # React/Vite frontend
+│   └── src/
+│       ├── pages/           # All route pages incl. LoginPage, EditorPortalPage
+│       ├── components/      # Navbar, Sidebar, Footer, ScoreCard, ReportCard...
+│       ├── context/         # AuthContext (Creator/Editor), DemoContext
+│       ├── services/        # API layer (api.ts)
+│       └── types/           # Shared TypeScript interfaces
+└── server/                  # Express backend
+    └── src/
+        ├── services/        # gemini.service.ts (GENA engine), mock.service.ts
+        ├── controllers/     # analysis.controller.ts
+        ├── routes/          # api.routes.ts
+        └── types/           # Shared type definitions
 ```
-
-### Tech Stack Details:
-- **Frontend**: React, TypeScript, Vite, Tailwind CSS, React Router DOM, Lucide React, Recharts, Framer Motion
-- **Backend**: Node.js, Express.js, TypeScript, Multer, `@google/genai` (Official Google Gen AI SDK)
-- **AI Engine**: Google Gemini API (`gemini-2.5-flash`)
-- **Storage**: Local disk upload handler (`/uploads` static server) with clean abstractions for Firebase Storage / S3.
 
 ---
 
-## 🚀 Quick Start & Installation
+## Getting Started
 
-### 1. Prerequisites
-- **Node.js**: v18.x or v20.x or higher
-- **npm** or **yarn**
+### Prerequisites
+- Node.js 18+
+- npm
 
-### 2. Environment Setup
-Copy `.env.example` to create your `.env` file:
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Priyanshasr/InfluBuilder.git
+cd InfluBuilder
+```
+
+### 2. Configure Environment
+
 ```bash
 cp .env.example .env
+# Edit .env and add your GEMINI_API_KEY
 ```
-Inside `.env`:
-```env
-GEMINI_API_KEY=your_google_gemini_api_key_here
-PORT=5000
-VITE_API_URL=http://localhost:5000/api
-```
+
+> **Without a GEMINI_API_KEY**, the app runs in **GENA Demo Mode** — all features work with realistic mock data. Perfect for judges and hackathon demos.
 
 ### 3. Install Dependencies
-Run the root setup command:
+
 ```bash
-cmd /c "npm install && cd server && npm install && cd ../client && npm install"
+# From root
+npm run install:all
 ```
 
-### 4. Run Locally
-Run both client and server concurrently:
-```bash
-# Terminal 1: Run backend server (Port 5000)
-cd server
-cmd /c "npm run dev"
+### 4. Run Development Servers
 
-# Terminal 2: Run frontend client (Port 3000)
-cd client
-cmd /c "npm run dev"
-```
-Or from root:
 ```bash
-cmd /c "npm run dev"
+# From root (starts both client and server)
+npm run dev
 ```
 
-Open `http://localhost:3000` in your browser.
+- **Frontend:** http://localhost:3000
+- **Backend:** http://localhost:5000/api
 
 ---
 
-## 🤖 Google Gemini API Integration
+## Demo Quick-Start (No API Key Needed)
 
-The Gemini integration is located at [`server/src/services/gemini.service.ts`](file:///C:/Users/Lenovo/.gemini/antigravity/scratch/influbuilder/server/src/services/gemini.service.ts).
-
-- Uses the official `@google/genai` SDK.
-- Uploads video files via `ai.files.upload`.
-- Requests structured JSON enforcing `responseMimeType: 'application/json'`.
-- Evaluates: Hook strength, Content clarity, Pacing rhythm, Visual quality, Audio quality, CTA quality, Priority fixes, and Timestamp suggestions.
-
----
-
-## 🎬 Hackathon Live Demo Flow (2-3 Minutes)
-
-1. **Landing Page**: Open `http://localhost:3000`. Show the product dashboard preview and click **"Analyze My Video"**.
-2. **Video Upload**: Select a draft video or click **"Analyze with Google Gemini"**.
-3. **Cinematic Loading**: Observe the step-by-step progress as Gemini analyzes video frames, hook, audio, and pacing.
-4. **AI Content Audit Report**: View the 78/100 circular score, Recharts radar chart, executive summary, and priority fixes.
-5. **Fix It Workflow**: Click **"Fix It"** on the opening hook fix to inspect DIY instructions or open the **Editor Marketplace**.
-6. **Editor Marketplace**: View editor profiles (Alex Vance, Marcus Chen) and click **"Hire Editor"**.
-7. **Before vs. After Comparison**: Navigate to `/comparison/proj-1` to see the signature split player and +15 score upgrade.
+1. Go to `/login`
+2. Click **"Try Creator Demo Instantly"** — jumps into the Creator Dashboard
+3. Go to **Analyze Video** → upload any video → see GENA report
+4. Go to `/login` → select **Video Editor** → click **"Try Editor Demo Instantly"**
+5. Accept a project, view the pre-attached GENA audit, upload a revised video
 
 ---
 
-## 📦 Deployment Instructions
+## Hackathon Theme: Best Use of Google Gemini API
 
-### Frontend (Vercel)
-- Framework Preset: Vite
-- Root Directory: `client`
-- Build Command: `npm run build`
-- Output Directory: `dist`
-
-### Backend (Render / Railway)
-- Root Directory: `server`
-- Build Command: `npm run build`
-- Start Command: `npm start`
-- Environment Variables: Add `GEMINI_API_KEY`.
+| Criterion | How GENA Delivers |
+|---|---|
+| **Core Use** | Gemini is the analysis engine, not a chatbot |
+| **Multimodal** | Video frames + audio processed together |
+| **Structured Output** | Schema-validated JSON with 6 score dimensions |
+| **End-to-End Workflow** | Upload → Audit → Fix → Verify — all GENA-driven |
+| **Dual Roles** | Creator and Editor both benefit from Gemini intelligence |
+| **Demo Ready** | Runs fully without API key via GENA Demo Mode |
 
 ---
 
-## 📄 License & Positioning Disclaimer
-InfluBuilder provides AI-generated content-quality indicators intended to assist content creators and video editors. InfluBuilder does not guarantee algorithm distribution, view counts, virality, or financial returns.
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `GEMINI_API_KEY` | Google Gemini API key (optional — GENA Demo Mode runs without it) |
+| `PORT` | Server port (default: 5000) |
+| `VITE_API_URL` | Frontend API URL (default: http://localhost:5000/api) |
+
+---
+
+## License
+
+MIT License © 2024 InfluBuilder

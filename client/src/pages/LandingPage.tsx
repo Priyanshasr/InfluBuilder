@@ -43,7 +43,7 @@ export const LandingPage: React.FC = () => {
             >
               <div className="w-2 h-2 rounded-full bg-brandOrange animate-ping" />
               <span className="text-xs font-bold text-navy-500 uppercase tracking-wide">
-                BUILT FOR GOOGLE GEMINI API HACKATHON
+                BUILT FOR GOOGLE GEMINI API HACKATHON — CORE AI: GENA
               </span>
               <Sparkles className="w-4 h-4 text-brandYellow" />
             </motion.div>
@@ -66,7 +66,7 @@ export const LandingPage: React.FC = () => {
               transition={{ delay: 0.2 }}
               className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
             >
-              Upload your video, let <strong className="text-navy-500 font-semibold">Gemini</strong> identify what is holding it back, and turn AI insights into actionable content improvements.
+              Upload your video, let <strong className="text-navy-500 font-semibold">GENA AI</strong> identify what is holding it back, and turn AI insights into actionable content improvements.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -107,11 +107,11 @@ export const LandingPage: React.FC = () => {
                 <div className="w-3 h-3 rounded-full bg-rose-400" />
                 <div className="w-3 h-3 rounded-full bg-amber-400" />
                 <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                <span className="text-xs font-semibold text-gray-400 ml-3">InfluBuilder Gemini Audit Console</span>
+                <span className="text-xs font-semibold text-gray-400 ml-3">InfluBuilder — GENA AI Audit Console</span>
               </div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Gemini 2.5 Multimodal Engine</span>
+                <span>GENA Multimodal Engine</span>
               </div>
             </div>
 
@@ -191,7 +191,7 @@ export const LandingPage: React.FC = () => {
                   <div>
                     <span className="text-xs font-bold text-rose-800">Priority Opportunity: Opening 5 Seconds</span>
                     <p className="text-xs text-rose-700 mt-0.5">
-                      "Gemini detected 4 seconds of ambient delay before vocal cue. Start directly with the core problem statement."
+                      "GENA detected 4 seconds of ambient delay before vocal cue. Start directly with the core problem statement."
                     </p>
                   </div>
                 </div>
@@ -290,7 +290,7 @@ export const LandingPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
             {[
               { num: "01", step: "UPLOAD", title: "Upload Video", desc: "Drag & drop MP4, MOV, or WEBM draft clip." },
-              { num: "02", step: "ANALYZE", title: "Gemini Audit", desc: "Gemini evaluates pacing, audio, and hook." },
+              { num: "02", step: "ANALYZE", title: "GENA Audit", desc: "GENA AI evaluates pacing, audio, and hook." },
               { num: "03", step: "UNDERSTAND", title: "AI Content Audit", desc: "Review detailed scores & timestamp fixes." },
               { num: "04", step: "IMPROVE", title: "DIY or Hire Editor", desc: "Apply fixes yourself or send to an editor." },
               { num: "05", step: "RE-CHECK", title: "Before vs After", desc: "Re-analyze improved video to confirm gains." },
@@ -308,22 +308,22 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Gemini Intelligence Showcase Section */}
-      <section id="gemini-ai" className="py-20 bg-navy-500 text-white relative overflow-hidden">
+      {/* 3. GENA Intelligence Showcase Section */}
+      <section id="gena-ai" className="py-20 bg-navy-500 text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brandBlue/20 text-brandYellow text-xs font-bold border border-brandYellow/30">
                 <Cpu className="w-4 h-4" />
-                <span>GOOGLE GEMINI AS CORE INTELLIGENCE LAYER</span>
+                <span>GENA AI — POWERED BY GOOGLE GEMINI</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
                 Not a Chatbot. <br />
                 A Multimodal Content Engine.
               </h2>
               <p className="text-gray-300 text-base leading-relaxed">
-                InfluBuilder uses Google Gemini's multimodal API capabilities to process visual frames, spoken audio transcripts, and clip structure simultaneously.
+                InfluBuilder's <strong className="text-brandYellow">GENA AI</strong> (powered by Google Gemini) uses multimodal API capabilities to process visual frames, spoken audio transcripts, and clip structure simultaneously.
               </p>
 
               <div className="space-y-4 pt-2">
@@ -349,7 +349,7 @@ export const LandingPage: React.FC = () => {
             {/* Interactive Code / Output Preview */}
             <div className="bg-navy-700 p-6 rounded-3xl border border-navy-600 shadow-2xl space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-navy-600">
-                <span className="text-xs font-mono text-brandYellow">gemini.models.generateContent()</span>
+                <span className="text-xs font-mono text-brandYellow">gena.analyzeVideo() — Gemini Backend</span>
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-mono">200 OK</span>
               </div>
               <pre className="text-xs font-mono text-blue-200 bg-navy-800 p-4 rounded-xl overflow-x-auto leading-relaxed border border-navy-600">
@@ -395,9 +395,9 @@ export const LandingPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center relative">
             {[
               { title: "1. Creator Uploads", desc: "Upload raw draft video", icon: Video },
-              { title: "2. Gemini Diagnoses", desc: "AI audit flags weak sections", icon: Sparkles },
+              { title: "2. GENA Diagnoses", desc: "AI audit flags weak sections", icon: Sparkles },
               { title: "3. Creator or Editor", desc: "Apply actionable fixes", icon: Users },
-              { title: "4. Gemini Verifies", desc: "Before vs After score upgrade", icon: GitCompare },
+              { title: "4. GENA Verifies", desc: "Before vs After score upgrade", icon: GitCompare },
             ].map((step, idx) => {
               const Icon = step.icon;
               return (
@@ -426,7 +426,7 @@ export const LandingPage: React.FC = () => {
                 Need a professional touch? Hire verified video editors.
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Send Gemini's exact audit report directly to specialist video editors on our marketplace. They know precisely what needs trimming and polishing.
+                Send GENA's exact audit report directly to specialist video editors on our marketplace. They know precisely what needs trimming and polishing.
               </p>
               <Link
                 to="/editor-marketplace"
@@ -468,15 +468,17 @@ export const LandingPage: React.FC = () => {
             Turn Every Upload Into a Better Version.
           </h2>
           <p className="text-gray-300 text-base max-w-xl mx-auto">
-            Upload your video right now and let Google Gemini audit your content in under 60 seconds.
+            Upload your video right now and let <strong className="text-brandYellow">GENA AI</strong> audit your content in under 60 seconds.
           </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link to="/login" className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white text-navy-500 font-bold text-base shadow-md hover:shadow-xl transition-all">Sign In / Create Account</Link>
           <Link
             to="/analyze"
             className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-brandOrange to-brandYellow text-navy-500 font-extrabold text-lg shadow-xl hover:scale-105 transition-all"
           >
             <Zap className="w-6 h-6 fill-navy-500" />
             <span>Analyze My Video Now</span>
-          </Link>
+          </Link></div>
         </div>
       </section>
 

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { analyzeVideoWithGemini } from '../services/gemini.service.js';
-import { sampleProjects, mockEditors, generateMockAnalysisForFilename } from '../services/mock.service.js';
-import { Project } from '../types/index.js';
+import { analyzeVideoWithGemini } from '../services/gemini.service';
+import { sampleProjects, mockEditors, generateMockAnalysisForFilename } from '../services/mock.service';
+import { Project } from '../types/index';
 
 // In-memory store initialized with sample projects
 export let projectsStore: Project[] = [...sampleProjects];

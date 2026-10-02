@@ -1,4 +1,4 @@
-import { GeminiAnalysis, Project, Editor } from '../types/index.js';
+import { GeminiAnalysis, Project, Editor } from '../types/index';
 
 export const mockEditors: Editor[] = [
   {

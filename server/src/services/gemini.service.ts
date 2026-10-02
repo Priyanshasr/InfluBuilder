@@ -1,9 +1,15 @@
+/**
+ * gena.service.ts
+ * GENA AI (powered by Google Gemini) — Core intelligence layer for InfluBuilder.
+ * GENA = General ENgagement Analyst. Internally uses the Gemini API.
+ */
+
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { GoogleAIFileManager } from '@google/generative-ai/server';
-import { GeminiAnalysis } from '../types/index.js';
-import { generateMockAnalysisForFilename } from './mock.service.js';
+import { GeminiAnalysis } from '../types/index';
+import { generateMockAnalysisForFilename } from './mock.service';
 
-export async function analyzeVideoWithGemini(
+export async function analyzeVideoWithGena(
   filePath: string,
   filename: string,
   mimeType: string
@@ -11,42 +17,42 @@ export async function analyzeVideoWithGemini(
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey || apiKey === 'your_key_here' || apiKey.trim() === '') {
-    console.log('[InfluBuilder AI] GEMINI_API_KEY not found or default. Using fallback Demo Analysis engine.');
+    console.log('[GENA AI] API key not configured. Using GENA Demo Analysis engine.');
     return generateMockAnalysisForFilename(filename);
   }
 
   try {
-    console.log(`[InfluBuilder AI] Initializing Gemini API for video analysis: ${filename}`);
+    console.log(`[GENA AI] Initializing analysis for: ${filename}`);
     const fileManager = new GoogleAIFileManager(apiKey);
     const genAI = new GoogleGenerativeAI(apiKey);
 
-    // Upload video file using Gemini File API
-    console.log(`[InfluBuilder AI] Uploading video file to Gemini AI File Manager...`);
+    // Upload video file using Gemini File API (GENA backend)
+    console.log(`[GENA AI] Uploading video to GENA processing pipeline...`);
     const uploadResult = await fileManager.uploadFile(filePath, {
       mimeType: mimeType || 'video/mp4',
       displayName: filename,
     });
 
-    console.log(`[InfluBuilder AI] File uploaded successfully: ${uploadResult.file.name}. Waiting for processing...`);
+    console.log(`[GENA AI] File received: ${uploadResult.file.name}. Waiting for processing...`);
 
     // Poll file status until ACTIVE
     let fileState = await fileManager.getFile(uploadResult.file.name);
     let attempts = 0;
     while (fileState.state === 'PROCESSING' && attempts < 15) {
-      console.log(`[InfluBuilder AI] Video processing in progress... (attempt ${attempts + 1})`);
+      console.log(`[GENA AI] Video processing... (attempt ${attempts + 1})`);
       await new Promise((resolve) => setTimeout(resolve, 3000));
       fileState = await fileManager.getFile(uploadResult.file.name);
       attempts++;
     }
 
     if (fileState.state === 'FAILED') {
-      throw new Error('Gemini File API processing failed for uploaded video.');
+      throw new Error('[GENA AI] Video processing failed. Falling back to Demo engine.');
     }
 
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const promptText = `
-You are an expert video content analyst for InfluBuilder, an AI-powered content improvement platform.
+You are GENA (General ENgagement Analyst), the AI content auditor for InfluBuilder — an AI-powered content improvement platform.
 Analyze this uploaded video as a comprehensive content-quality audit.
 
 Evaluate:
@@ -114,7 +120,7 @@ If timestamps cannot be reliably inferred, return an empty array for timestamps 
 Return ONLY the raw JSON string without markdown code block formatting.
 `;
 
-    console.log(`[InfluBuilder AI] Sending analysis prompt to Gemini model...`);
+    console.log(`[GENA AI] Running multimodal analysis via Gemini backend...`);
     const result = await model.generateContent([
       {
         fileData: {
@@ -126,16 +132,16 @@ Return ONLY the raw JSON string without markdown code block formatting.
     ]);
 
     const responseText = result.response.text();
-    console.log(`[InfluBuilder AI] Received response from Gemini. Parsing JSON...`);
+    console.log(`[GENA AI] Analysis complete. Parsing structured report...`);
 
     const cleanedText = responseText.replace(/```json/g, '').replace(/```/g, '').trim();
     const parsedData: GeminiAnalysis = JSON.parse(cleanedText);
 
-    // Cleanup file from Gemini API storage
+    // Cleanup file from API storage
     try {
       await fileManager.deleteFile(uploadResult.file.name);
     } catch (e) {
-      console.warn('[InfluBuilder AI] Cleanup of uploaded file from Gemini failed non-critically:', e);
+      console.warn('[GENA AI] Non-critical: Cleanup of processed file failed:', e);
     }
 
     return {
@@ -143,8 +149,11 @@ Return ONLY the raw JSON string without markdown code block formatting.
       isDemo: false,
     };
   } catch (error) {
-    console.error('[InfluBuilder AI] Gemini API Analysis failed:', error);
-    console.log('[InfluBuilder AI] Falling back to Demo Analysis engine to maintain demo availability.');
+    console.error('[GENA AI] Analysis pipeline failed:', error);
+    console.log('[GENA AI] Falling back to GENA Demo Analysis engine to maintain demo availability.');
     return generateMockAnalysisForFilename(filename);
   }
 }
+
+// Keep backward-compatible alias
+export const analyzeVideoWithGemini = analyzeVideoWithGena;

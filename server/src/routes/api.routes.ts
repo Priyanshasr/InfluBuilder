@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { uploadMiddleware } from '../services/storage.service.js';
+import { uploadMiddleware } from '../services/storage.service';
 import {
   analyzeVideoHandler,
   getProjectsHandler,
@@ -9,17 +9,17 @@ import {
   getEditorByIdHandler,
   hireEditorHandler,
   deleteProjectHandler,
-} from '../controllers/analysis.controller.js';
+} from '../controllers/analysis.controller';
 
 const router = Router();
 
-// Health check and Gemini status
+// Health check and GENA AI status
 router.get('/status', (_req, res) => {
   const hasKey = !!process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'your_key_here';
   res.json({
     status: 'online',
     geminiConfigured: hasKey,
-    mode: hasKey ? 'Real Gemini API' : 'Demo Mode (Mock Analysis)',
+    mode: hasKey ? 'GENA AI Live (Gemini Backend)' : 'GENA Demo Mode (Mock Analysis)',
   });
 });
 

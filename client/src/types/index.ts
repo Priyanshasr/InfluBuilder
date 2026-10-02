@@ -1,4 +1,5 @@
 export type Severity = 'high' | 'medium' | 'low';
+export type UserRole = 'creator' | 'editor';
 
 export interface IssueItem {
   title: string;
@@ -55,6 +56,7 @@ export interface Project {
   editorId?: string;
   editorStatus?: 'pending' | 'accepted' | 'in_review' | 'completed';
   editorNotes?: string;
+  clientName?: string;
 }
 
 export interface Editor {
@@ -77,8 +79,9 @@ export interface User {
   name: string;
   email: string;
   avatar: string;
-  creatorType: string;
-  contentCategories: string[];
+  role: UserRole;
+  creatorType?: string;
+  contentCategories?: string[];
   bio: string;
   stats: {
     videosAnalyzed: number;

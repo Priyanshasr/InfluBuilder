@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { DemoProvider } from './context/DemoContext';
 import { ToastContainer } from './components/common/ToastContainer';
 
@@ -16,6 +16,39 @@ import { ProjectsPage } from './pages/ProjectsPage';
 import { ComparisonPage } from './pages/ComparisonPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SettingsPage } from './pages/SettingsPage';
+import { EditorPortalPage } from './pages/EditorPortalPage';
+
+/** Protected route — redirect to login if not authenticated */
+const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? element : <Navigate to="/login" replace />;
+};
+
+const AppRoutes: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+
+      {/* Creator Routes */}
+      <Route path="/dashboard" element={<ProtectedRoute element={<DashboardPage />} />} />
+      <Route path="/analyze" element={<ProtectedRoute element={<AnalyzePage />} />} />
+      <Route path="/report/:id" element={<ProtectedRoute element={<ReportPage />} />} />
+      <Route path="/projects" element={<ProtectedRoute element={<ProjectsPage />} />} />
+      <Route path="/comparison/:id" element={<ProtectedRoute element={<ComparisonPage />} />} />
+
+      {/* Editor Portal */}
+      <Route path="/editor-portal" element={<ProtectedRoute element={<EditorPortalPage />} />} />
+
+      {/* Shared */}
+      <Route path="/editor-marketplace" element={<EditorMarketplacePage />} />
+      <Route path="/editor/:id" element={<EditorProfilePage />} />
+      <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
+      <Route path="/settings" element={<ProtectedRoute element={<SettingsPage />} />} />
+    </Routes>
+  );
+};
 
 export const App: React.FC = () => {
   return (
@@ -23,20 +56,7 @@ export const App: React.FC = () => {
       <DemoProvider>
         <Router>
           <div className="min-h-screen bg-bgLight text-textMain">
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/analyze" element={<AnalyzePage />} />
-              <Route path="/report/:id" element={<ReportPage />} />
-              <Route path="/editor-marketplace" element={<EditorMarketplacePage />} />
-              <Route path="/editor/:id" element={<EditorProfilePage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/comparison/:id" element={<ComparisonPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-            </Routes>
+            <AppRoutes />
             <ToastContainer />
           </div>
         </Router>
