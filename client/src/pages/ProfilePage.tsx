@@ -30,7 +30,7 @@ export const ProfilePage: React.FC = () => {
               <p className="text-xs text-gray-600 max-w-md leading-relaxed">{user?.bio}</p>
 
               <div className="flex flex-wrap justify-center sm:justify-start gap-2 pt-2">
-                {user?.contentCategories.map((cat, idx) => (
+                {user?.contentCategories?.map((cat, idx) => (
                   <span key={idx} className="px-3 py-1 rounded-full bg-navy-50 text-navy-600 text-xs font-semibold">
                     {cat}
                   </span>

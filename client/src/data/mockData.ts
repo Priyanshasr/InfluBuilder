@@ -5,6 +5,7 @@ export const initialUser: User = {
   name: 'Alex Rivera',
   email: 'alex@creativestudio.io',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250',
+  role: 'creator',
   creatorType: 'Tech & Productivity Creator',
   contentCategories: ['Instagram Reels', 'YouTube Shorts', 'Educational Tutorials'],
   bio: 'Building tech tutorials and productivity tips for over 150K creators. Using AI content audits to maximize retention.',
