@@ -18,6 +18,20 @@ app.use(express.urlencoded({ extended: true }));
 const uploadsPath = path.join(__dirname, '../uploads');
 app.use('/uploads', express.static(uploadsPath));
 
+// Root Route
+app.get('/', (_req, res) => {
+  res.json({
+    message: '🚀 InfluBuilder API Server is Online',
+    status: 'online',
+    version: '1.0.0',
+    endpoints: {
+      status: '/api/status',
+      projects: '/api/projects',
+      editors: '/api/editors'
+    }
+  });
+});
+
 // API Routes
 app.use('/api', apiRoutes);
 
